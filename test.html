@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FAQ</title>
+    <style>
+        .faq-container {
+            width: 60%;
+            margin: 0 auto;
+        }
+        .faq-item {
+            border: 1px solid #ddd;
+            margin-bottom: 10px;
+            padding: 10px;
+            cursor: pointer;
+            background-color: #f9f9f9;
+        }
+        .faq-item:hover {
+            background-color: #f0f0f0;
+        }
+        .faq-answer {
+            display: none;
+            padding-top: 10px;
+            padding-left: 20px;
+            font-style: italic;
+            color: #555;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="faq-container">
+        <div class="faq-item">
+            <h3>คำถามที่ 1: วิธีการตั้งค่าเว็บไซต์?</h3>
+            <div class="faq-answer">
+                <p>คำตอบ: คุณสามารถตั้งค่าเว็บไซต์ได้โดยการเข้าถึงหน้า Dashboard และเลือกการตั้งค่าในเมนูที่มีอยู่.</p>
+            </div>
+        </div>
+        <div class="faq-item">
+            <h3>คำถามที่ 2: ฉันสามารถแก้ไขเนื้อหาของเว็บไซต์ได้หรือไม่?</h3>
+            <div class="faq-answer">
+                <p>คำตอบ: ใช่, คุณสามารถแก้ไขเนื้อหาได้ง่ายๆ ผ่านหน้าแก้ไขบทความหรือเพจใน Dashboard ของเว็บไซต์.</p>
+            </div>
+        </div>
+        <div class="faq-item">
+            <h3>คำถามที่ 3: วิธีการเพิ่มผู้ใช้งานใหม่?</h3>
+            <div class="faq-answer">
+                <p>คำตอบ: คุณสามารถเพิ่มผู้ใช้งานใหม่ได้จากเมนูผู้ใช้งานใน Dashboard โดยกรอกข้อมูลที่จำเป็นและกำหนดบทบาทให้กับผู้ใช้งานใหม่.</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // ดึงทุก faq-item มา
+        const faqItems = document.querySelectorAll('.faq-item');
+        
+        // เพิ่ม Event Listener ให้กับทุก faq-item
+        faqItems.forEach(item => {
+            item.addEventListener('click', () => {
+                // หา .faq-answer ที่อยู่ภายใน .faq-item นั้นๆ
+                const answer = item.querySelector('.faq-answer');
+                
+                // สลับการแสดงผล (แสดง/ซ่อน)
+                answer.style.display = answer.style.display === 'block' ? 'none' : 'block';
+            });
+        });
+    </script>
+</body>
+</html>
