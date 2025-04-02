@@ -1,0 +1,1132 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ดาวน์โหลด - สำนักเทคโนโลยีสารสนเทศ มหาวิทยาลัยนอร์ทกรุงเทพ</title>
+    <!-- เพิ่มลิงก์ฟอนต์ไทย -->
+    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Mitr:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- เพิ่ม Font Awesome สำหรับไอคอน -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* สีหลักของมหาวิทยาลัย */
+        :root {
+            --primary-color: #003366;
+            --secondary-color: #0066cc;
+            --accent-color: #ff9900;
+            --light-color: #f8f9fa;
+            --dark-color: #212529;
+            --light-gray: #e9ecef;
+            --medium-gray: #adb5bd;
+            --dark-gray: #495057;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        
+        body {
+            font-family: 'Prompt', 'Sarabun', sans-serif;
+            line-height: 1.6;
+            color: var(--dark-color);
+            background-color: var(--light-color);
+        }
+        
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+        
+        ul {
+            list-style: none;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: var(--accent-color);
+            color: white;
+            border-radius: 5px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .btn:hover {
+            background-color: #e68a00;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        .btn-outline {
+            background-color: transparent;
+            border: 2px solid var(--accent-color);
+            color: var(--accent-color);
+        }
+        
+        .btn-outline:hover {
+            background-color: var(--accent-color);
+            color: white;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .section-title h2 {
+            font-family: 'Kanit', sans-serif;
+            font-size: 2rem;
+            font-weight: 500;
+            color: var(--primary-color);
+            margin-bottom: 10px;
+            position: relative;
+            display: inline-block;
+            padding-bottom: 10px;
+        }
+        
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            width: 60%;
+            height: 3px;
+            background-color: var(--accent-color);
+            bottom: 0;
+            left: 20%;
+            border-radius: 3px;
+        }
+        
+        .section-title p {
+            font-weight: 300;
+            color: var(--dark-gray);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        /* Header Styles */
+        header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        header.header-scrolled {
+            padding: 10px 0;
+            background-color: rgba(0, 51, 102, 0.95);
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo img {
+            height: 50px;
+            margin-right: 15px;
+        }
+        
+        .logo-text h1 {
+            font-family: 'Kanit', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 500;
+            margin-bottom: 5px;
+            letter-spacing: 0.5px;
+        }
+        
+        .logo-text p {
+            font-family: 'Mitr', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 300;
+            color: var(--accent-color);
+        }
+        
+        nav ul {
+            display: flex;
+        }
+        
+        nav ul li {
+            margin-left: 20px;
+        }
+        
+        nav ul li a {
+            font-weight: 400;
+            padding: 5px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            background-color: var(--accent-color);
+            bottom: 0;
+            left: 0;
+            transition: width 0.3s ease;
+        }
+        
+        nav ul li a:hover::after, nav ul li a.active::after {
+            width: 100%;
+        }
+        
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        
+        /* Page Header */
+        .page-header {
+            background: linear-gradient(rgba(0, 51, 102, 0.8), rgba(0, 51, 102, 0.8)), url('/api/placeholder/1200/300') center/cover no-repeat;
+            color: white;
+            padding: 50px 0;
+            text-align: center;
+        }
+        
+        .page-header h1 {
+            font-family: 'Kanit', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+        
+        .breadcrumb {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 10px;
+        }
+        
+        .breadcrumb a {
+            color: var(--accent-color);
+        }
+        
+        .breadcrumb span {
+            margin: 0 10px;
+        }
+        
+        /* Downloads Section */
+        .downloads-section {
+            padding: 80px 0;
+        }
+        
+        .download-tabs {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+        
+        .download-tab {
+            padding: 12px 25px;
+            background-color: white;
+            color: var(--dark-gray);
+            border-radius: 5px;
+            margin: 5px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+        }
+        
+        .download-tab:hover {
+            background-color: var(--light-gray);
+        }
+        
+        .download-tab.active {
+            background-color: var(--accent-color);
+            color: white;
+        }
+        
+        .download-content {
+            display: none;
+        }
+        
+        .download-content.active {
+            display: block;
+        }
+        
+        .download-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .download-card {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+        }
+        
+        .download-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .download-icon {
+            height: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: var(--light-gray);
+            font-size: 3rem;
+            color: var(--primary-color);
+        }
+        
+        .download-icon i {
+            transition: transform 0.3s ease;
+        }
+        
+        .download-card:hover .download-icon i {
+            transform: scale(1.1);
+        }
+        
+        .download-details {
+            padding: 20px;
+        }
+        
+        .download-title {
+            font-family: 'Kanit', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 500;
+            color: var(--primary-color);
+            margin-bottom: 10px;
+        }
+        
+        .download-info {
+            font-weight: 300;
+            color: var(--dark-gray);
+            margin-bottom: 15px;
+        }
+        
+        .download-meta {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.85rem;
+            color: var(--medium-gray);
+            margin-bottom: 15px;
+        }
+        
+        .download-size {
+            display: flex;
+            align-items: center;
+        }
+        
+        .download-size i {
+            margin-right: 5px;
+        }
+        
+        .download-date {
+            display: flex;
+            align-items: center;
+        }
+        
+        .download-date i {
+            margin-right: 5px;
+        }
+        
+        .download-actions {
+            display: flex;
+            justify-content: space-between;
+        }
+        
+        .download-btn {
+            flex: 1;
+            text-align: center;
+            padding: 10px;
+            background-color: var(--secondary-color);
+            color: white;
+            border-radius: 5px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        
+        .download-btn:hover {
+            background-color: var(--primary-color);
+        }
+        
+        .download-btn i {
+            margin-right: 5px;
+        }
+        
+        /* Search Bar */
+        .search-bar {
+            display: flex;
+            margin-bottom: 30px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .search-input {
+            flex: 1;
+            padding: 12px 15px;
+            border: 2px solid var(--light-gray);
+            border-radius: 5px 0 0 5px;
+            font-family: 'Prompt', sans-serif;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+        
+        .search-input:focus {
+            border-color: var(--secondary-color);
+            outline: none;
+        }
+        
+        .search-btn {
+            padding: 12px 20px;
+            background-color: var(--secondary-color);
+            color: white;
+            border: none;
+            border-radius: 0 5px 5px 0;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .search-btn:hover {
+            background-color: var(--primary-color);
+        }
+        
+        .search-btn i {
+            margin-right: 5px;
+        }
+        
+        /* Footer Styles */
+        footer {
+            background-color: var(--dark-color);
+            color: white;
+            padding: 50px 0 20px;
+        }
+        
+        .footer-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 30px;
+        }
+        
+        .footer-about p {
+            font-weight: 300;
+            color: #adb5bd;
+            margin-bottom: 20px;
+        }
+        
+        .footer-logo {
+            margin-bottom: 20px;
+        }
+        
+        .footer-logo img {
+            height: 50px;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            transition: all 0.3s ease;
+        }
+        
+        .social-links a:hover {
+            background-color: var(--accent-color);
+            transform: translateY(-3px);
+        }
+        
+        .footer-links h4 {
+            font-family: 'Mitr', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 500;
+            margin-bottom: 20px;
+            color: var(--accent-color);
+        }
+        
+        .footer-links ul li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-links ul li a {
+            font-weight: 300;
+            color: #adb5bd;
+            transition: all 0.3s ease;
+        }
+        
+        .footer-links ul li a:hover {
+            color: white;
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.9rem;
+            font-weight: 300;
+            color: #adb5bd;
+        }
+        
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            nav {
+                position: fixed;
+                top: 70px;
+                left: -100%;
+                width: 250px;
+                height: calc(100vh - 70px);
+                background-color: var(--primary-color);
+                box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+                transition: all 0.3s ease;
+                z-index: 1000;
+            }
+            
+            nav.active {
+                left: 0;
+            }
+            
+            nav ul {
+                flex-direction: column;
+                padding: 20px;
+            }
+            
+            nav ul li {
+                margin: 0 0 15px 0;
+            }
+            
+            nav ul li a {
+                display: block;
+                padding: 10px;
+            }
+            
+            .page-header h1 {
+                font-size: 2rem;
+            }
+            
+            .download-tabs {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .download-tab {
+                width: 100%;
+                margin-bottom: 10px;
+                text-align: center;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .logo-text h1 {
+                font-size: 1.2rem;
+            }
+            
+            .logo-text p {
+                font-size: 0.75rem;
+            }
+            
+            .page-header {
+                padding: 30px 0;
+            }
+            
+            .page-header h1 {
+                font-size: 1.5rem;
+            }
+            
+            .section-title h2 {
+                font-size: 1.5rem;
+            }
+            
+            .search-bar {
+                flex-direction: column;
+            }
+            
+            .search-input {
+                border-radius: 5px;
+                margin-bottom: 10px;
+            }
+            
+            .search-btn {
+                border-radius: 5px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Section -->
+    <header>
+        <div class="container">
+            <div class="header-container">
+                <div class="logo">
+         <!--           <img src="/api/placeholder/50/50" alt="มหาวิทยาลัยนอร์ทกรุงเทพ โลโก้">  -->
+                    <div class="logo-text">
+                        <h1>สำนักเทคโนโลยีสารสนเทศ</h1>
+                        <p>มหาวิทยาลัยนอร์ทกรุงเทพ</p>
+                    </div>
+                </div>
+                <button class="mobile-menu-btn">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <nav id="mainNav">
+                    <ul>
+                        <li><a href="index.html">หน้าหลัก</a></li>
+                        <li><a href="oitabout.html">เกี่ยวกับเรา</a></li>
+                        <li><a href="oitservices.html">บริการ</a></li>
+                        <li><a href="oitdownloads.html" class="active">ดาวน์โหลด</a></li>
+                        <li><a href="oitannouncements.html">ข่าวประกาศ</a></li>
+                        <li><a href="oitcontact.html">ติดต่อเรา</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <h1>ดาวน์โหลด</h1>
+            <div class="breadcrumb">
+                <a href="index.html">หน้าหลัก</a>
+                <span>/</span>
+                <span>ดาวน์โหลด</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Downloads Section -->
+    <section class="downloads-section">
+        <div class="container">
+            <div class="section-title">
+                <h2>ศูนย์รวมการดาวน์โหลด</h2>
+                <p>ซอฟต์แวร์ คู่มือ แบบฟอร์ม และเอกสารต่างๆ สำหรับนักศึกษาและบุคลากร</p>
+            </div>
+            
+            <!-- Search Bar -->
+            <div class="search-bar">
+                <input type="text" class="search-input" placeholder="ค้นหาไฟล์ดาวน์โหลด...">
+                <button class="search-btn"><i class="fas fa-search"></i> ค้นหา</button>
+            
+            </div>
+            
+            <!-- Download Tabs -->
+            <div class="download-tabs">
+                <div class="download-tab active" data-tab="software">ซอฟต์แวร์</div>
+                <div class="download-tab" data-tab="manuals">คู่มือการใช้งาน</div>
+                <div class="download-tab" data-tab="forms">แบบฟอร์ม</div>
+                <div class="download-tab" data-tab="documents">เอกสาร</div>
+                <div class="download-tab" data-tab="others">อื่นๆ</div>
+            </div>
+            
+            <!-- Download Content -->
+            <div class="download-content active" id="software">
+                <div class="download-list">
+                    <div class="download-card">
+                        <div class="download-icon">
+                            <i class="fab fa-microsoft"></i>
+                        </div>
+                        <div class="download-details">
+                            <div class="download-title">Microsoft Office 365 สำหรับนักศึกษา</div>
+                            <div class="download-info">โปรแกรม Microsoft Office 365 สำหรับนักศึกษามหาวิทยาลัยนอร์ทกรุงเทพ ประกอบด้วย Word, Excel, PowerPoint, Outlook และอื่นๆ</div>
+                            <div class="download-meta">
+                                <div class="download-size"><i class="fas fa-hdd"></i> 2.5 GB</div>
+                                <div class="download-date"><i class="far fa-calendar-alt"></i> 01/02/2025</div>
+                            </div>
+                            <div class="download-actions">
+                                <a href="#" class="download-btn"><i class="fas fa-download"></i> ดาวน์โหลด</a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="download-card">
+                        <div class="download-icon">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <div class="download-details">
+                            <div class="download-title">โปรแกรมป้องกันไวรัส (Antivirus)</div>
+                            <div class="download-info">โปรแกรมป้องกันไวรัสสำหรับนักศึกษาและบุคลากร ใช้ได้ทั้งระบบ Windows และ MacOS</div>
+                            <div class="download-meta">
+                                <div class="download-size"><i class="fas fa-hdd"></i> 450 MB</div>
+                                <div class="download-date"><i class="far fa-calendar-alt"></i> 15/03/2025</div>
+                            </div>
+                            <div class="download-actions">
+                                <a href="#" class="download-btn"><i class="fas fa-download"></i> ดาวน์โหลด</a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="download-card">
+                        <div class="download-icon">
+                            <i class="fas fa-desktop"></i>
+                        </div>
+                        <div class="download-details">
+                            <div class="download-title">โปรแกรม Remote Desktop</div>
+                            <div class="download-info">โปรแกรมสำหรับเชื่อมต่อกับเครื่องคอมพิวเตอร์ในมหาวิทยาลัยจากระยะไกล</div>
+                            <div class="download-meta">
+                                <div class="download-size"><i class="fas fa-hdd"></i> 75 MB</div>
+                                <div class="download-date"><i class="far fa-calendar-alt"></i> 10/01/2025</div>
+                            </div>
+                            <div class="download-actions">
+                                <a href="#" class="download-btn"><i class="fas fa-download"></i> ดาวน์โหลด</a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="download-card">
+                        <div class="download-icon">
+                            <i class="fas fa-file-pdf"></i>
+                        </div>
+                        <div class="download-details">
+                            <div class="download-title">Adobe Acrobat Reader</div>
+                            <div class="download-info">โปรแกรมสำหรับเปิดไฟล์ PDF รองรับทั้งระบบ Windows, MacOS และ Linux</div>
+                            <div class="download-meta">
+                                <div class="download-size"><i class="fas fa-hdd"></i> 120 MB</div>
+                                <div class="download-date"><i class="far fa-calendar-alt"></i> 05/02/2025</div>
+                            </div>
+                            <div class="download-actions">
+                                <a href="#" class="download-btn"><i class="fas fa-download"></i> ดาวน์โหลด</a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="download-card">
+                        <div class="download-icon">
+                            <i class="fab fa-firefox"></i>
+                        </div>
+                        <div class="download-details">
+                            <div class="download-title">Mozilla Firefox</div>
+                            <div class="download-info">เว็บเบราว์เซอร์ที่รวดเร็วและปลอดภัย แนะนำสำหรับการใช้งานระบบสารสนเทศของมหาวิทยาลัย</div>
+                            <div class="download-meta">
+                                <div class="download-size"><i class="fas fa-hdd"></i> 85 MB</div>
+                                <div class="download-date"><i class="far fa-calendar-alt"></i> 20/03/2025</div>
+                            </div>
+                            <div class="download-actions">
+                                <a href="#" class="download-btn"><i class="fas fa-download"></i> ดาวน์โหลด</a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="download-card">
+                        <div class="download-icon">
+                            <i class="fab fa-windows"></i>
+                        </div>
+                        <div class="download-details">
+                            <div class="download-title">Windows 11 Education</div>
+                            <div class="download-info">ระบบปฏิบัติการ Windows 11 รุ่น Education สำหรับนักศึกษาและบุคลากร</div>
+                            <div class="download-meta">
+                                <div class="download-size"><i class="fas fa-hdd"></i> 5.2 GB</div>
+                                <div class="download-date"><i class="far fa-calendar-alt"></i> 10/01/2025</div>
+                            </div>
+                            <div class="download-actions">
+                                <a href="#" class="download-btn"><i class="fas fa-download"></i> ดาวน์โหลด</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="download-content" id="manuals">
+                <div class="download-list">
+                    <div class="download-card">
+                        <div class="download-icon">
+                            <i class="fas fa-book"></i>
+                        </div>
+                        <div class="download-details">
+                            <div class="download-title">คู่มือการใช้งานระบบ e-Learning</div>
+                            <div class="download-info">คู่มืออธิบายวิธีการใช้งานระบบ e-Learning สำหรับนักศึกษาและอาจารย์</div>
+                            <div class="download-meta">
+                                <div class="download-size"><i class="fas fa-hdd"></i> 5.2 MB</div>
+                                <div class="download-date"><i class="far fa-calendar-alt"></i> 15/02/2025</div>
+                            </div>
+                            <div class="download-actions">
+                                <a href="#" class="download-btn"><i class="fas fa-download"></i> ดาวน์โหลด</a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="download-card">
+                        <div class="download-icon">
+                            <i class="fas fa-book"></i>
+                        </div>
+                        <div class="download-details">
+                            <div class="download-title">คู่มือการใช้งาน Microsoft Teams</div>
+                            <div class="download-info">คู่มือการใช้งาน Microsoft Teams สำหรับการเรียนการสอนออนไลน์และการประชุม</div>
+                            <div class="download-meta">
+                                <div class="download-size"><i class="fas fa-hdd"></i> 3.8 MB</div>
+                                <div class="download-date"><i class="far fa-calendar-alt"></i> 20/01/2025</div>
+                            </div>
+                            <div class="download-actions">
+                                <a href="#" class="download-btn"><i class="fas fa-download"></i> ดาวน์โหลด</a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="download-card">
+                        <div class="download-icon">
+                            <i class="fas fa-book"></i>
+                        </div>
+                        <div class="download-details">
+                            <div class="download-title">คู่มือการใช้งานระบบอีเมลสถาบัน</div>
+                            <div class="download-info">คู่มือแนะนำวิธีการใช้งานอีเมลสถาบันผ่าน Outlook และเว็บเบราว์เซอร์</div>
+                            <div class="download-meta">
+                                <div class="download-size"><i class="fas fa-hdd"></i> 2.5 MB</div>
+                                <div class="download-date"><i class="far fa-calendar-alt"></i> 05/03/2025</div>
+                            </div>
+                            <div class="download-actions">
+                                <a href="#" class="download-btn"><i class="fas fa-download"></i> ดาวน์โหลด</a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="download-card">
+                        <div class="download-icon">
+                            <i class="fas fa-book"></i>
+                        </div>
+                        <div class="download-details">
+                            <div class="download-title">คู่มือการใช้งาน VPN</div>
+                            <div class="download-info">คู่มือการตั้งค่าและใช้งาน VPN เพื่อเข้าถึงทรัพยากรของมหาวิทยาลัยจากภายนอก</div>
+                            <div class="download-meta">
+                                <div class="download-size"><i class="fas fa-hdd"></i> 1.8 MB</div>
+                                <div class="download-date"><i class="far fa-calendar-alt"></i> 25/02/2025</div>
+                            </div>
+                            <div class="download-actions">
+                                <a href="#" class="download-btn"><i class="fas fa-download"></i> ดาวน์โหลด</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="download-content" id="forms">
+                <div class="download-list">
+                    <div class="download-card">
+                        <div class="download-icon">
+                            <i class="fas fa-file-alt"></i>
+                        </div>
+                        <div class="download-details">
+                            <div class="download-title">แบบฟอร์มขอใช้บริการระบบเครือข่าย</div>
+                            <div class="download-info">แบบฟอร์มสำหรับการขอใช้บริการระบบเครือข่ายเพิ่มเติม เช่น การขอ IP Address เพิ่มเติม</div>
+                            <div class="download-meta">
+                                <div class="download-size"><i class="fas fa-hdd"></i> 520 KB</div>
+                                <div class="download-date"><i class="far fa-calendar-alt"></i> 10/01/2025</div>
+                            </div>
+                            <div class="download-actions">
+                                <a href="#" class="download-btn"><i class="fas fa-download"></i> ดาวน์โหลด</a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="download-card">
+                        <div class="download-icon">
+                            <i class="fas fa-file-alt"></i>
+                        </div>
+                        <div class="download-details">
+                            <div class="download-title">แบบฟอร์มแจ้งซ่อมอุปกรณ์คอมพิวเตอร์</div>
+                            <div class="download-info">แบบฟอร์มสำหรับแจ้งซ่อมอุปกรณ์คอมพิวเตอร์และอุปกรณ์ต่อพ่วงที่ชำรุด</div>
+                            <div class="download-meta">
+                                <div class="download-size"><i class="fas fa-hdd"></i> 480 KB</div>
+                                <div class="download-date"><i class="far fa-calendar-alt"></i> 15/02/2025</div>
+                            </div>
+                            <div class="download-actions">
+                                <a href="#" class="download-btn"><i class="fas fa-download"></i> ดาวน์โหลด</a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="download-card">
+                        <div class="download-icon">
+                            <i class="fas fa-file-alt"></i>
+                        </div>
+                        <div class="download-details">
+                            <div class="download-title">แบบฟอร์มยืมอุปกรณ์โสตทัศนูปกรณ์</div>
+                            <div class="download-info">แบบฟอร์มสำหรับการยืมอุปกรณ์โสตทัศนูปกรณ์ เช่น โปรเจคเตอร์ เครื่องเสียง</div>
+                            <div class="download-meta">
+                                <div class="download-size"><i class="fas fa-hdd"></i> 510 KB</div>
+                                <div class="download-date"><i class="far fa-calendar-alt"></i> 20/03/2025</div>
+                            </div>
+                            <div class="download-actions">
+                                <a href="#" class="download-btn"><i class="fas fa-download"></i> ดาวน์โหลด</a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="download-card">
+                        <div class="download-icon">
+                            <i class="fas fa-file-alt"></i>
+                        </div>
+                        <div class="download-details">
+                            <div class="download-title">แบบฟอร์มขอใช้บริการพื้นที่จัดเก็บข้อมูล</div>
+                            <div class="download-info">แบบฟอร์มสำหรับการขอใช้บริการพื้นที่จัดเก็บข้อมูลบนระบบเซิร์ฟเวอร์ของมหาวิทยาลัย</div>
+                            <div class="download-meta">
+                                <div class="download-size"><i class="fas fa-hdd"></i> 490 KB</div>
+                                <div class="download-date"><i class="far fa-calendar-alt"></i> 05/01/2025</div>
+                            </div>
+                            <div class="download-actions">
+                                <a href="#" class="download-btn"><i class="fas fa-download"></i> ดาวน์โหลด</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="download-content" id="documents">
+                <div class="download-list">
+                    <div class="download-card">
+                        <div class="download-icon">
+                            <i class="fas fa-file-pdf"></i>
+                        </div>
+                        <div class="download-details">
+                            <div class="download-title">นโยบายความปลอดภัยด้านเทคโนโลยีสารสนเทศ</div>
+                            <div class="download-info">เอกสารนโยบายความปลอดภัยด้านเทคโนโลยีสารสนเทศของมหาวิทยาลัย</div>
+                            <div class="download-meta">
+                                <div class="download-size"><i class="fas fa-hdd"></i> 1.2 MB</div>
+                                <div class="download-date"><i class="far fa-calendar-alt"></i> 10/02/2025</div>
+                            </div>
+                            <div class="download-actions">
+                                <a href="#" class="download-btn"><i class="fas fa-download"></i> ดาวน์โหลด</a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="download-card">
+                        <div class="download-icon">
+                            <i class="fas fa-file-pdf"></i>
+                        </div>
+                        <div class="download-details">
+                            <div class="download-title">แผนพัฒนาด้านเทคโนโลยีสารสนเทศ ปี 2025-2030</div>
+                            <div class="download-info">เอกสารแผนพัฒนาด้านเทคโนโลยีสารสนเทศของมหาวิทยาลัย ปี 2025-2030</div>
+                            <div class="download-meta">
+                                <div class="download-size"><i class="fas fa-hdd"></i> 2.5 MB</div>
+                                <div class="download-date"><i class="far fa-calendar-alt"></i> 15/01/2025</div>
+                            </div>
+                            <div class="download-actions">
+                                <a href="#" class="download-btn"><i class="fas fa-download"></i> ดาวน์โหลด</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="download-content" id="others">
+                <div class="download-list">
+                    <div class="download-card">
+                        <div class="download-icon">
+                            <i class="fas fa-image"></i>
+                        </div>
+                        <div class="download-details">
+                            <div class="download-title">ภาพพื้นหลังมหาวิทยาลัย</div>
+                            <div class="download-info">ภาพพื้นหลังของมหาวิทยาลัยที่สามารถนำไปใช้กับคอมพิวเตอร์และอุปกรณ์มือถือ</div>
+                            <div class="download-meta">
+                                <div class="download-size"><i class="fas fa-hdd"></i> 25 MB</div>
+                                <div class="download-date"><i class="far fa-calendar-alt"></i> 20/02/2025</div>
+                            </div>
+                            <div class="download-actions">
+                                <a href="#" class="download-btn"><i class="fas fa-download"></i> ดาวน์โหลด</a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="download-card">
+                        <div class="download-icon">
+                            <i class="fas fa-font"></i>
+                        </div>
+                        <div class="download-details">
+                            <div class="download-title">ฟอนต์มหาวิทยาลัยนอร์ทกรุงเทพ</div>
+                            <div class="download-info">ฟอนต์ทางการของมหาวิทยาลัยนอร์ทกรุงเทพสำหรับใช้ในเอกสารต่างๆ</div>
+                            <div class="download-meta">
+                                <div class="download-size"><i class="fas fa-hdd"></i> 2.8 MB</div>
+                                <div class="download-date"><i class="far fa-calendar-alt"></i> 05/03/2025</div>
+                            </div>
+                            <div class="download-actions">
+                                <a href="#" class="download-btn"><i class="fas fa-download"></i> ดาวน์โหลด</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer Section -->
+    <footer>
+        <div class="container">
+            <div class="footer-container">
+                <div class="footer-about">
+                    <div class="footer-logo">
+                        <img src="/api/placeholder/50/50" alt="มหาวิทยาลัยนอร์ทกรุงเทพ โลโก้">
+                    </div>
+                    <p>สำนักเทคโนโลยีสารสนเทศ มหาวิทยาลัยนอร์ทกรุงเทพ ให้บริการด้านเทคโนโลยีสารสนเทศแก่นักศึกษา คณาจารย์ และบุคลากรของมหาวิทยาลัย</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                        <a href="#"><i class="fab fa-line"></i></a>
+                    </div>
+                </div>
+                <div class="footer-links">
+                    <h4>ลิงก์ด่วน</h4>
+                    <ul>
+                        <li><a href="index.html">หน้าหลัก</a></li>
+                        <li><a href="oitabout.html">เกี่ยวกับเรา</a></li>
+                        <li><a href="oitservices.html">บริการ</a></li>
+                        <li><a href="oitdownloads.html">ดาวน์โหลด</a></li>
+                        <li><a href="oitannouncements.html">ข่าวประกาศ</a></li>
+                        <li><a href="oitcontact.html">ติดต่อเรา</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h4>บริการของเรา</h4>
+                    <ul>
+                        <li><a href="oitservices.html#network">บริการระบบเครือข่าย</a></li>
+                        <li><a href="oitservices.html#software">บริการซอฟต์แวร์</a></li>
+                        <li><a href="oitservices.html#audio-visual">บริการโสตทัศนูปกรณ์</a></li>
+                        <li><a href="oitservices.html#training">ฝึกอบรม IT</a></li>
+                        <li><a href="oitservices.html#maintenance">ซ่อมบำรุงอุปกรณ์</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h4>ติดต่อเรา</h4>
+                    <ul>
+                        <li><i class="fas fa-map-marker-alt"></i> มหาวิทยาลัยนอร์ทกรุงเทพ</li>
+                        <li><i class="fas fa-phone-alt"></i> 0-2555-2222 ต่อ 1234</li>
+                        <li><i class="fas fa-envelope"></i> itsupport@northbkk.ac.th</li>
+                        <li><i class="fas fa-clock"></i> จันทร์-ศุกร์ 08.30-16.30 น.</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                &copy; 2025 สำนักเทคโนโลยีสารสนเทศ มหาวิทยาลัยนอร์ทกรุงเทพ. สงวนลิขสิทธิ์.
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Mobile Menu Toggle
+            const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+            const mainNav = document.getElementById('mainNav');
+            
+            mobileMenuBtn.addEventListener('click', function() {
+                mainNav.classList.toggle('active');
+                const icon = this.querySelector('i');
+                
+                if (mainNav.classList.contains('active')) {
+                    icon.classList.remove('fa-bars');
+                    icon.classList.add('fa-times');
+                } else {
+                    icon.classList.remove('fa-times');
+                    icon.classList.add('fa-bars');
+                }
+            });
+            
+            // Fixed Header on Scroll
+            const header = document.querySelector('header');
+            
+            function toggleHeaderClass() {
+                if (window.scrollY > 100) {
+                    header.classList.add('header-scrolled');
+                } else {
+                    header.classList.remove('header-scrolled');
+                }
+            }
+            
+            window.addEventListener('scroll', toggleHeaderClass);
+            toggleHeaderClass(); // Check initial state
+            
+            // Tab Switching
+            const downloadTabs = document.querySelectorAll('.download-tab');
+            const downloadContents = document.querySelectorAll('.download-content');
+            
+            downloadTabs.forEach(tab => {
+                tab.addEventListener('click', function() {
+                    // Remove active class from all tabs
+                    downloadTabs.forEach(t => t.classList.remove('active'));
+                    
+                    // Add active class to clicked tab
+                    this.classList.add('active');
+                    
+                    // Hide all content
+                    downloadContents.forEach(content => content.classList.remove('active'));
+                    
+                    // Show content related to clicked tab
+                    const tabId = this.getAttribute('data-tab');
+                    document.getElementById(tabId).classList.add('active');
+                });
+            });
+            
+            // Search Functionality
+            const searchInput = document.querySelector('.search-input');
+            const searchBtn = document.querySelector('.search-btn');
+            const downloadCards = document.querySelectorAll('.download-card');
+            
+            function performSearch() {
+                const searchTerm = searchInput.value.toLowerCase();
+                
+                downloadCards.forEach(card => {
+                    const title = card.querySelector('.download-title').textContent.toLowerCase();
+                    const info = card.querySelector('.download-info').textContent.toLowerCase();
+                    
+                    if (title.includes(searchTerm) || info.includes(searchTerm)) {
+                        card.style.display = 'block';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            }
+            
+            searchBtn.addEventListener('click', performSearch);
+            
+            searchInput.addEventListener('keyup', function(e) {
+                if (e.key === 'Enter') {
+                    performSearch();
+                }
+            });
+        });
+    </script>
+
+                
+                
