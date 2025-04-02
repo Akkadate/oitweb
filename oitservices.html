@@ -435,17 +435,18 @@
         }
         
         .faq-answer {
-            padding: 0 20px;
-            max-height: 0;
-            overflow: hidden;
-            transition: all 0.3s ease;
-        }
+  padding: 0 20px;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.6s ease-in-out;
+}
+
         
-        .faq-answer p {
-            padding-bottom: 20px;
-            font-weight: 300;
-            color: var(--dark-gray);
-        }
+.faq-answer p {
+  padding: 15px 0 20px; /* padding-top จาก 0 → 15px */
+  font-weight: 300;
+  color: var(--dark-gray);
+}
         
         .faq-item.active .faq-question {
             background-color: var(--light-gray);
@@ -1168,5 +1169,33 @@
             </div>
         </div>
     </footer>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+          const faqItems = document.querySelectorAll(".faq-item");
+      
+          faqItems.forEach(item => {
+            const question = item.querySelector(".faq-question");
+            const answer = item.querySelector(".faq-answer");
+      
+            question.addEventListener("click", () => {
+              const isActive = item.classList.contains("active");
+      
+              // ปิดทั้งหมดก่อน
+              faqItems.forEach(i => {
+                i.classList.remove("active");
+                i.querySelector(".faq-answer").style.maxHeight = null;
+              });
+      
+              // ถ้าไม่ได้เปิดอยู่ ให้เปิดอันที่คลิก
+              if (!isActive) {
+                item.classList.add("active");
+                answer.style.maxHeight = answer.scrollHeight + "px";
+              }
+            });
+          });
+        });
+      </script>
+      
+      
 </body>
 </html>
